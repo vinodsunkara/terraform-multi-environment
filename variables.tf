@@ -1,19 +1,17 @@
-# Project Name
-
-variable "proj" {
-  default = "VIN"
-}
-
 # Environments
 
 variable "env" {
 
   default = {
-    dev = "DEV"
-    stage = "STAGE"
-    qa = "QA"
-    prod = "PROD"
+    environment = "DEV"
   }
+}
+
+
+# Project Name
+
+variable "proj" {
+  default = "VIN"
 }
 
 # Names
@@ -23,7 +21,7 @@ variable "names" {
       vnet = "VNET"
       snet = "SUBNET"
       nic = "NIC"
-      stoarage = "STORAGE"
+      storage = "STORAGE"
       ip = "IP"
       nsg = "NSG"
       vm = "VM"
@@ -36,6 +34,18 @@ variable "vm-details" {
     admin_password = "Administrator@123"
   }
 }
+
+variable "VNET_ADDRESS_SPACE" {
+  default = "10.0.0.0/16"
+}
+
+variable "SUBNET_ADDRESS_PREFIX" {
+  default = "10.0.0.0/24"
+}
+
+
+
+
 
 
 
