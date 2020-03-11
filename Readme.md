@@ -14,7 +14,7 @@
 
 ## Introduction
 
-#### ARM vs Terraform
+### ARM vs Terraform
 ![](Images/armVSterraform.png)
 
 ### Terraform Installation
@@ -23,7 +23,7 @@ Terraform is an open source flatform and just need to install the terraform pack
 **Installation:**
 For windows, download the package from https://www.terraform.io/downloads.html and extract the file into any location. Now, set the terraform path in system advanced settings 
 
-Open PC properties => Advanced system settings => Environment Variables => Edit => Paste the path
+Open PC properties :arrow_forward: Advanced system settings :arrow_forward: Environment Variables :arrow_forward: Edit :arrow_forward: Paste the path
 
 ### Provider
 Terraform provider can be defined within the infrastructure plan but are recommended to be stored in their own provider file. All files in your Terraform directory using the .tf file format will be automatically loaded during operations.
