@@ -14,6 +14,9 @@
 
 ## Introduction
 
+#### ARM vs Terraform
+![](Images/armVSterraform.png)
+
 ### Terraform Installation
 Terraform is an open source flatform and just need to install the terraform package in target server if you want to start working.
 
@@ -37,3 +40,4 @@ Provider "azurerm" {
 ```
 
 The version is optional. It is used to constrain the provider to a specific version or a range of versions in order to prevent downloading a new provider that may possibly contain breaking changes. If the version isn't specified, Terraform will automatically download the most recent provider during initialization.
+
