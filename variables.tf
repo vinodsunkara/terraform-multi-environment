@@ -1,52 +1,45 @@
-# Environments
+# Regions Short Name using interpolation lookup syntax
 
-variable "env" {
-
-  default = {
-    environment = "DEV"
-  }
-}
-
-
-# Project Name
-
-variable "proj" {
-  default = "VIN"
-}
-
-# Names
-variable "names" {
+variable "region" {
     default = {
-      rg = "RG"
-      vnet = "VNET"
-      snet = "SUBNET"
-      nic = "NIC"
-      storage = "STORAGE"
-      ip = "IP"
-      nsg = "NSG"
-      vm = "VM"
-   }  
+      centralus = "centralus"
+      eastus = "eastus"
+      westus2 = "westus2"
+  }
+}
+variable "shortname" {
+    default = {
+     centralus = "CUA01"
+     eastus = "EUA01"
+     westus2 = "WUA01"
+    }
 }
 
-variable "vm-details" {
+# VNET address space based on the environment
+
+variable "vnet_address_space" {
   default = {
-    admin_username = "vinodsunkara"
-    admin_password = "Administrator@123"
+      DEV = "10.0.2.0/24"
+      PROD = "10.0.3.0/24"
+      DR = "10.0.4.0/24"
   }
 }
 
-variable "VNET_ADDRESS_SPACE" {
-  default = "10.0.0.0/16"
+variable "subnet_address_prefix" {
+  default = {
+      DEV = "10.0.2.0/16"
+      PROD = "10.0.3.0/16"
+      DR = "10.0.4.0/16"
+  }
 }
 
-variable "SUBNET_ADDRESS_PREFIX" {
-  default = "10.0.0.0/24"
+# VM Size
+variable "vm_size" {
+  default = {
+      DEV = "Standard_DS1_v2"
+      DR = "Standard_DS2_v2"
+      PROD = "Standard_DS3_v2"
+  }
 }
-
-
-
-
-
-
 
 
