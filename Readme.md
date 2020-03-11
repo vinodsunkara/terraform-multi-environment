@@ -12,3 +12,5 @@
 
 ## Terraform 
 
+#### ARM vs Terraform
+https://github.com/vinodsunkara/terraform-multi-environment/blob/master/Images/armVSterraform.png
