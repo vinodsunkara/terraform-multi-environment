@@ -8,7 +8,7 @@
 | mainvar.tf | Replace with the pipeline variables |
 | variables.tf | variables |
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
-| 
+
 
 ## Terraform 
 
