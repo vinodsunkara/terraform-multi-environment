@@ -23,9 +23,11 @@ variable "azure_details" {
 
 variable "azurestorage" {
   default = {
+    resourcegroup = "${resourcegroup}"
     terraformstorageaccount = "${terraformstorageaccount}"
     storagecontainer = "${storagecontainer}"
     storagekey = "${storagekey}"
+    key = "${key}"
   }
 }
 

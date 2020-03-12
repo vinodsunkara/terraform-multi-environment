@@ -2,9 +2,10 @@
 
 terraform {
   backend "azurerm" {
+    resource_group_name = "${var.azurestorage.resourcegroup}"
     storage_account_name = "${var.azurestorage.terraformstorageaccount}"
     container_name = "${var.azurestorage.storagecontainer}"
-    access_key = "${var.azurestorage.storagekey}"
+    key = "${var.azurestorage.key}"
   }
 }
 
