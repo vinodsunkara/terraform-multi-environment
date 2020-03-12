@@ -111,9 +111,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location = "${azurerm_resource_group.rg.location}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   vm_size = "${local.vm_size}"
-  admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
-  disable_password_authentication = false
+  
+  os_profile {	
+    computer_name = "${local.resource_name}-${local.region_short_name}-VM"	
+    admin_username = "admin"	
+    admin_password = "Administrator@123"
+  }
   
   source_image_reference {
     publisher = "Canonical"
@@ -126,4 +129,3 @@ resource "azurerm_linux_virtual_machine" "vm" {
     caching              = "ReadWrite"
   }
 }
-
