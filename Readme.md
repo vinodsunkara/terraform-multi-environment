@@ -157,12 +157,15 @@ Terraform apply
 ```
 
 ### Terraform state
+***Remote state:***
+Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
+
 * When Terraform created the infrastructure it also wrote data into the terraform.tfstate file. 
 * The state keeps track of the all managed resources and their associated properties with current values. This state file is extremely important. 
 * It is necessary to preserve the state file in a secured place for the entire life cycle of the resources.
 * ***We can commit it to the code repository where you store all your terraform configuration files***
 * ***But, this is not a recommended way to keep this file in code repository since it contains all the sensitive information of the infrastructure (include passwords)***
-* ***The better way is to store it in Azure Storage container
+* ***The better way is to store it in Azure Storage container***
 * If you change anything in the terraform configurations (like adding new resources), terraform builds an execution plan that only modifies what is necessary to reach your desired state.
 * Terraform uses this state file to create plans and make changes to the infrastructure. 
 * Before any terraform operation, Terraform does a refresh to update the state with the real infrastructure.
@@ -178,8 +181,7 @@ Lineage: "",
 Outputs: {},
 Resources: []
 ```
-***Remote state:***
-Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
+
 
 #### Uses of storage account for state files:
 * Azure Storage blobs are automatically locked before any operation that writes to state files. 
@@ -221,7 +223,7 @@ Terraform supports a few different variable formats. Depending on the usage, the
 	}
 ```
 
-***#### Terraform 0.11 and earlier required type constraints to be given in quotes, but that form is now deprecated and will be removed in a future version of Terraform.***
+*** Terraform 0.11 and earlier required type constraints to be given in quotes, but that form is now deprecated and will be removed in a future version of Terraform.***
 
 Again, the input variable divided into below parts
 
