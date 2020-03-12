@@ -345,6 +345,7 @@ Terraform workspaces are the successor to Terraform environments. workspaces all
 ### Output of the release pipeline
 
 * Resource Groups for each environment 
+
 ![](Images/pipeline6.png)
 
 ### Remote storage for state files
