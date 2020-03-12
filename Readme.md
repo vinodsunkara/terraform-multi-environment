@@ -5,7 +5,7 @@
 |File Name | Description |
 |--------- | ------------|
 | main.tf | It contains all the resource configurations |
-| mainvar.tf | Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables |
+| mainvar.tf | It Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables |
 | variables.tf | variables |
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
 
@@ -180,7 +180,8 @@ Lineage: "",
 Outputs: {},
 Resources: []
 ```
-
+***Remote state:***
+Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
 
 #### Uses of storage account for state files:
 * Azure Storage blobs are automatically locked before any operation that writes to state files. 
@@ -331,7 +332,7 @@ Fifth, terraform apply. The terraform apply command to deploy the resources. By 
 Using Terraform, the production environment can be codified and then shared with staging, QA or dev. These configurations can be used to rapidly spin up new environments to test in, and then be easily disposed of. Terraform can help team the difficulty of maintaining parallel environments, and makes it practical to elastically create and destroy them.
 
 
-Simply, replace the mainvvar.tf file variables with PROD environmebt pipeline variables, and here you can set the pre-deployment approval conditions before creating the infrastructure.
+Simply, replace the mainvvar.tf file variables with PROD environmebt pipeline variables, and store the tfstate file in another remote location
 
 ![](Images/pipeline5.png)
 
@@ -340,6 +341,12 @@ Simply, replace the mainvvar.tf file variables with PROD environmebt pipeline va
 ***Workspaces:***
 Terraform workspaces are the successor to Terraform environments. workspaces allow you to separate your state and infrastructure without changing anything in your code. All workspace names would be supported by the tool and each workspace would be considered an environment.
 
-***Remote state:***
-Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
 
+### Output of the release pipeline
+
+* Resource Groups for each environment 
+![](Images/pipeline6.png)
+
+### Remote storage for state files
+
+![](Images/pipeline7.png)
