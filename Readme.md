@@ -21,7 +21,7 @@ This document will cover the basic architecture of terraform and it includes the
 ### ARM vs Terraform
 ![](Images/armVSterraform.png)
 
-### Syntax
+### Resource (ARm vs HCL)
 ![](Images/JSONvsHCL.png)
 
 ### Resources syntax (ARM vs HCL)
