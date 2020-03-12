@@ -10,8 +10,6 @@
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
 
 
-# Terraform 
-
 ## Introduction
 This document will cover the basic architecture of terraform and it includes the 
 * Comparison between ARM template, Terraform 
