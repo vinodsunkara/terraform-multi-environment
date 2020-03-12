@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "rg" {
 # Storage Account
 
 resource "azurerm_storage_account" "storage" {
-  name = "vinodstorage"
+  name = "${lower("${local.region_short_name}${var.environment}")}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   location = "${azurerm_resource_group.rg.location}"
   account_tier = "Standard"
@@ -105,7 +105,7 @@ resource "azurerm_network_interface" "nic" {
 
 
 # Virtual Machine
-resource "azurerm_virtual_machine" "vm" {
+resource "azurerm_linux_virtual_machine" "vm" {
   name = "${local.resource_name}-${local.region_short_name}-VM"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   location = "${azurerm_resource_group.rg.location}"
