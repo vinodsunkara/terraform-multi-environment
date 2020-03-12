@@ -110,7 +110,7 @@ resource "azurerm_virtual_machine" "vm" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
   location = "${azurerm_resource_group.rg.location}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
-  size = "${local.vm_size}"
+  vm_size = "${local.vm_size}"
     
   storage_os_disk {
     name = "myOsDisk"
