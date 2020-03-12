@@ -1,11 +1,11 @@
-# Create a mutli-environment Infrastructure with Terraform and Azure DevOps
+# Create an Azure mutli-environment Infrastructure with Terraform and Azure DevOps
 
 ### Files
 
 |File Name | Description |
 |--------- | ------------|
 | main.tf | It contains all the resource configurations |
-| mainvar.tf | Replace with the pipeline variables |
+| mainvar.tf | Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables |
 | variables.tf | variables |
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
 
@@ -286,12 +286,60 @@ resource "azurerm_resource_group" "rg" {
 
 ```
 
+### Azure DevOps pipeline
+
+* To create an azure DevOps pipeline for your multi infrstarcture environment deployment, go to DevOps organization, select the project and click on Releases
+* Create a ***+New Release Pieline***, and start with an ***Empty Job***
+* Select the artifact location, in this example our configuration files are located in GitHub, so select the GitHub as an artifact location for this pipeline
+* Provide all the required details
+
+
+**In the next step, we need to add some tasks to the agent job. A job is a series of steps that run sequentially as a unit. In other words, a job is the smallest unit of work that can be scheduled to run.**
+
+The first task is, replace the terraform variables in our mainvar.tf file with pipeline variable, with this task we can avoid storing all the sensitive information in variable files.
+
+![](Images/pipeline1.png)
+
+If you see the mainvar.tf file, you will notice that the values are suffixed with "${" and prefixed with "}"
+The replace tokens task will replace the those values with the variable values defined in the release pipeline.
+
+
+![](Images/pipeline2.png)
+
+Second, the terraform installer task is used to install the terraform in the build agent. With this task we can specify the version of the terraform
+
+Third, terraform init task. This task runs terraform init command. The terraform init command looks through all of the *.tf files in the current working directory and automatically downloads any of the providers required for them. 
+
+![](Images/pipeline3.png)
+
+***Backend storage, the task is currently supporting two types of backend configurations***
+
+1. local (default for terraform) - State is stored on the agent file system.
+2. azurerm - State is stored in a blob container within a specified Azure Storage Account.
+	
+If you select the azurerm, it will ask for the storage account and container details. This task will automatically create the resource group, storage account, and container for remote azurerm backend, if not exists. To enable this, select the task for the terraform init command. Check the checkbox labled "Create Backend (If not exists)"
+
+Fourth, terraform plan. The terraform plan command is used to create an execution plan. Terraform determines what actions are necessary to achieve the desired state specified in the configuration files. This is a dry run and shows which actions will be made. 
+
+Fifth, terraform apply. The terraform apply command to deploy the resources. By default, it will also prompt for confirmation that you want to apply those changes. Since we are automating the deployment we are adding auto-approve argument to not prompt for confirmation.
+
+![](Images/pipeline4.png)
+
+
 ### Terraform Multi-Environment
 
 Using Terraform, the production environment can be codified and then shared with staging, QA or dev. These configurations can be used to rapidly spin up new environments to test in, and then be easily disposed of. Terraform can help team the difficulty of maintaining parallel environments, and makes it practical to elastically create and destroy them.
+
+
+Simply, replace the mainvvar.tf file variables with PROD environmebt pipeline variables, and here you can set the pre-deployment approval conditions before creating the infrastructure.
+
+![](Images/pipeline5.png)
+
+***OR we can create multi-environment pipelines using workspaces***
 
 ***Workspaces:***
 Terraform workspaces are the successor to Terraform environments. workspaces allow you to separate your state and infrastructure without changing anything in your code. All workspace names would be supported by the tool and each workspace would be considered an environment.
 
 ***Remote state:***
 Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
+
