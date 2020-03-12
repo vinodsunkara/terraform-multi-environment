@@ -157,12 +157,14 @@ Terraform apply
 ```
 
 ### Terraform state
-***Remote state:***
-Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
 
 * When Terraform created the infrastructure it also wrote data into the terraform.tfstate file. 
 * The state keeps track of the all managed resources and their associated properties with current values. This state file is extremely important. 
 * It is necessary to preserve the state file in a secured place for the entire life cycle of the resources.
+
+***Remote state:***
+Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
+
 * ***We can commit it to the code repository where you store all your terraform configuration files***
 * ***But, this is not a recommended way to keep this file in code repository since it contains all the sensitive information of the infrastructure (include passwords)***
 * ***The better way is to store it in Azure Storage container***
