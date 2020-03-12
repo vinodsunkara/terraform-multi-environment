@@ -1,15 +1,15 @@
 # Lob Prefix
 
 variable "lobprefix" {
-  default = "VINIT"
+  default = "${lobprefix}"
 }
 variable "environment" {
-  default = "DEV"
+  default = "${environment}"
 }
 
 # Location
 variable "location" {
-  default = "eastus"
+  default = "${location}"
 }
 
 variable "azure_details" {
