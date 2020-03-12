@@ -112,10 +112,11 @@ resource "azurerm_virtual_machine" "vm" {
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   size = "${local.vm_size}"
     
-  os_disk {
+  storage_os_disk {
     name = "myOsDisk"
     caching = "ReadWrite"
     create_option = "FromImage"
+    managed_disk_type = "Premium_LRS"
   }
 
   storage_image_reference {
@@ -129,10 +130,9 @@ resource "azurerm_virtual_machine" "vm" {
     admin_username = "admin"
     admin_password = "Administrator@123"
   }
-  boot_diagnostics {
-    enabled = "true"
-    storage_account_uri = "${azurerm_storage_account.storage.primary_blob_endpoint}"
-}
+   os_profile_linux_config {
+        disable_password_authentication = false
+  }
 
 
 }
