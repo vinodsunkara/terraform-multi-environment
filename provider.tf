@@ -6,11 +6,3 @@ provider "azurerm" {
   features{}
 }
 
-terraform {
-  backend "azurerm" {
-    storage_account_name = "${terraformstorageaccount}"
-    container_name = "${storagecontainer}"
-    key = "${dev.tfstate}"
-    access_key = "${storagekey}"
-  }
-}

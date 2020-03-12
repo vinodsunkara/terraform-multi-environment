@@ -1,3 +1,14 @@
+# Backend storage for state files
+
+terraform {
+  backend "azurerm" {
+    storage_account_name = "${var.azurestorage.terraformstorageaccount}"
+    container_name = "${var.azurestorage.storagecontainer}"
+    access_key = "${var.azurestorage.storagekey}"
+  }
+}
+
+
 # Local Values
 locals  {
  region_short_name = "${lookup (var.shortname, var.location, var.region)}"
