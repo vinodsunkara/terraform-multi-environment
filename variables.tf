@@ -27,9 +27,9 @@ variable "vnet_address_space" {
 
 variable "subnet_address_prefix" {
   default = {
-      DEV = "10.0.2.0/16"
-      PROD = "10.0.3.0/16"
-      DR = "10.0.4.0/16"
+      DEV = "10.0.2.0/24"
+      PROD = "10.0.3.0/24"
+      DR = "10.0.4.0/24"
   }
 }
 
