@@ -21,10 +21,10 @@ This document will cover the basic architecture of terraform and it includes the
 ### ARM vs Terraform
 ![](Images/armVSterraform.png)
 
-### Resource (ARm vs HCL)
+### Resource (ARM vs Terraform)
 ![](Images/JSONvsHCL.png)
 
-### Resources syntax (ARM vs HCL)
+### Resources syntax (ARM vs Terraform)
 ![](Images/resources_syntax.png)
 
 ### Benifits of using Terraform for Azure
