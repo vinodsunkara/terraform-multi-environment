@@ -127,7 +127,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
   os_profile {
     computer_name = "${local.resource_name}-${local.region_short_name}-VM"
-    admin_username = "admin"
+    admin_username = "azureuser"
     admin_password = "Administrator@123"
   }
    os_profile_linux_config {
