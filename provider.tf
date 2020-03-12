@@ -5,3 +5,12 @@ provider "azurerm" {
   client_secret = "${var.azure_details.client_secret}"
   features{}
 }
+
+terraform {
+  backend "azurerm" {
+    storage_account_name = "${terraformstorageaccount}"
+    container_name = "${storagecontainer}"
+    key = "${dev.tfstate}"
+    access_key = "${storagekey}"
+  }
+}

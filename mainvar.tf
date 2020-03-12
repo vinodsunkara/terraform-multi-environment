@@ -20,3 +20,13 @@ variable "azure_details" {
       client_secret = "${clientsecret}"
   }
 }
+
+variable "azurestorage" {
+  default = {
+    terraformstorageaccount = "${terraformstorageaccount}"
+    storagecontainer = "${storagecontainer}"
+    dev.tfstate = "${dev.tfstate}"
+    storagekey = "${storagekey}"
+  }
+}
+
