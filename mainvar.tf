@@ -25,7 +25,6 @@ variable "azurestorage" {
   default = {
     terraformstorageaccount = "${terraformstorageaccount}"
     storagecontainer = "${storagecontainer}"
-    dev.tfstate = "${dev.tfstate}"
     storagekey = "${storagekey}"
   }
 }
