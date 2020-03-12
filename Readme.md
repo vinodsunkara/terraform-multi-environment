@@ -334,8 +334,6 @@ Using Terraform, the production environment can be codified and then shared with
 
 Simply, replace the mainvvar.tf file variables with PROD environmebt pipeline variables, and store the tfstate file in another remote location
 
-![](Images/pipeline5.png)
-
 ***OR we can create multi-environment pipelines using workspaces***
 
 ***Workspaces:***
@@ -343,8 +341,8 @@ Terraform workspaces are the successor to Terraform environments. workspaces all
 
 
 ### Output of the release pipeline
-
-* Resource Groups for each environment 
+![](Images/pipeline5.png)
+### Resource Groups for each environment 
 
 ![](Images/pipeline6.png)
 
