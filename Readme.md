@@ -71,13 +71,16 @@ provider "azurerm" {
 ![](Images/authentication.png)
 
 **We can authenticate the deployment in several ways by using the following methods.**
+
 ***Using Azure CLI***
+s
 This method is good when you are working in your local environment
 ```
 Az login
 Az account set --sub "****************"
 ```
 ***Using MSI (Managed Service Identity)***
+
 Managed identities for Azure resources is a feature of Azure Active Directory (Azure AD). Using a managed identity for the Terraform host VM or container removes the need to pass a client secret or certificate to Terraform.
 
 ```
@@ -89,6 +92,7 @@ Provider "azurerm" {
 }
 ```
 ***Using Service Principal ID and secret***
+
 A Service Principal is an application within Azure Active Directory whose authentication tokens can be used as the client_id, client_secret, and tenant_id
 
 * Create a new active directory application in azure portal
@@ -163,16 +167,16 @@ Terraform apply
 * ***If the destination state has a higher serial, Terraform will not allow you to write it since it means that changes have occurred since the state you're attempting to write***
 * We can bypass this by passing the command `-force`
 ```
-		Version of the state file: "",
-		Terraform version: "",
-		Serial number: "",
-		Lineage: "",
-		Outputs: {},
-		Resources: []
+Version of the state file: "",
+Terraform version: "",
+Serial number: "",
+Lineage: "",
+Outputs: {},
+Resources: []
 ```
 
 
-### Uses of storage account for state files:
+#### Uses of storage account for state files:
 * Azure Storage blobs are automatically locked before any operation that writes to state files. 
 * This pattern prevents concurrent state operations, which can cause corruption. 
 
