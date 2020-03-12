@@ -5,7 +5,7 @@
 |File Name | Description |
 |--------- | ------------|
 | main.tf | It contains all the resource configurations |
-| mainvar.tf | It Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables for each environment  |
+| mainvar.tf | It Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables for each environment <ul><li>subscriptionid</li><li>tenantid</li><li>clientid</li><li>clientsecret</li><li>environment</li><li>location</li><li>starage account resource group name</li><li>storage account container name</li><li>key (statefile name for each environment)</li> |
 | variables.tf | common variables |
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
 
