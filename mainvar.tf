@@ -26,7 +26,6 @@ variable "azurestorage" {
     resourcegroup = "${resourcegroup}"
     terraformstorageaccount = "${terraformstorageaccount}"
     storagecontainer = "${storagecontainer}"
-    storagekey = "${storagekey}"
     key = "${key}"
   }
 }
