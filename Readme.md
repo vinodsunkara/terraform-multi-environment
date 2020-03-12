@@ -73,7 +73,7 @@ provider "azurerm" {
 **We can authenticate the deployment in several ways by using the following methods.**
 
 ***Using Azure CLI***
-s
+
 This method is good when you are working in your local environment
 ```
 Az login
@@ -181,3 +181,111 @@ Resources: []
 * This pattern prevents concurrent state operations, which can cause corruption. 
 
 * Data stored in an Azure blob is encrypted before being persisted. 
+
+#### What is terraform rule?
+* Once you started the automation with terraform, make all the other changes of the infrastructure using terraform only
+* Don't go manually and change the configuration of the resources.
+* Sometimes it will break the deployment 
+
+
+### Dependencies
+When Terraform changes the infrastructure, many of the changes have to be made in a specific order. This order is determined by resource dependencies. There are two types of dependencies:
+
+***Implicit dependencies,*** which Terraform and the Azure provider determine automatically for you based on the configuration. 
+
+For example, you can't create a new virtual machine without first having a network interface (NIC). Azurerm "knows" to create the NIC before attempting to create the VM.
+
+***Explicit dependencies,*** which you define using the depends_on meta-argument. Explicit dependencies are used when Terraform can't "see" an implicit dependency, and when you want to override the default execution plan.
+
+### Variables
+Terraform variables can be defined within the infrastructure plan but are recommended to be stored in their own variables file. All files in your Terraform directory using the .tf file format will be automatically loaded during operations.
+
+Terraform supports a few different variable formats. Depending on the usage, the variables are generally divided into inputs and outputs.
+
+#### Input Variables:
+* The input variables are used to define values that configure your infrastructure. 
+* These values can be used again and again without having to remember their every occurrence in the event. 
+* It needs to be updated.
+* The input variable usually defined by stating a name, type and value
+* The type of the variable is not necessary. If you use it in the terraform 0.11 and later you will get a waring like below since terraform can deduct the type of the variable from the default or input value.
+```
+	variable "name" {
+		type = "string"    
+		default = "RG"
+	  
+	}
+```
+
+***#### Terraform 0.11 and earlier required type constraints to be given in quotes, but that form is now deprecated and will be removed in a future version of Terraform.***
+
+Again, the input variable divided into below parts
+
+* Strings
+* List
+* Maps
+* Bools
+
+#### Output Variables
+Output variables, in contrast, are used to get information about the infrastructure after deployment. These can be useful for passing on information such as IP addresses or DNS names for connecting to the server or to browse the DNS name.
+
+Define a name for the output and what value it should represent. For example, you could have Terraform show your server’s IP address after deployment with the output variable below.
+```
+	output "Server-IP" {
+	  value = "value"
+	}
+```
+
+### What are the modules in terraform?
+* With Terraform, you can put your code inside of a Terraform module and reuse that module in multiple places throughout your code. 
+* Instead of having the same code copy/pasted in the staging and production environments, you’ll be able to have both environments reuse code from the same module.
+* Modules are the key ingredient to writing reusable, maintainable, and testable Terraform code. 
+* Once you start using them, there’s no going back. 
+
+### What are the local values in terraform?
+Local values can be helpful to avoid repeating the same values or expressions multiple times in a configuration, but if overused they can also make a configuration hard to read by future maintainers by hiding the actual values used.
+
+Use local values only in moderation, in situations where a single value or result is used in many places and that value is likely to be changed in future. 
+
+For example, in the below configuration I would like use the same naming convention for every resource. So I don't want to repeat same syntax multiple times. So we can simply add that configuration in local value and use it in multiple times wherever you want. 
+
+```
+# Regions Short Name using interpolation lookup syntax
+variable "region" {
+    default = {
+      centralus = "centralus"
+      eastus = "eastus"
+      westus2 = "westus2"
+  }
+}
+variable "shortname" {
+    default = {
+     centralus = "CUA01"
+     eastus = "EUA01"
+     westus2 = "WUA01"
+    }
+}
+
+
+# Local Values
+locals  {
+ region_short_name = "${lookup (var.shortname, var.location, var.region)}"
+}
+
+
+# Resource Group (Used the local values for naming convention)
+resource "azurerm_resource_group" "rg" {
+  name = "${var.lobprefix}-${var.environment}-${local.region_short_name}-NET-RG"
+  location = "${var.location}"
+}
+
+```
+
+### Terraform Multi-Environment
+
+Using Terraform, the production environment can be codified and then shared with staging, QA or dev. These configurations can be used to rapidly spin up new environments to test in, and then be easily disposed of. Terraform can help team the difficulty of maintaining parallel environments, and makes it practical to elastically create and destroy them.
+
+***Workspaces:***
+Terraform workspaces are the successor to Terraform environments. workspaces allow you to separate your state and infrastructure without changing anything in your code. All workspace names would be supported by the tool and each workspace would be considered an environment.
+
+***Remote state:***
+Keeping state files of each environment in a remote location is must. Since the terraform apply modifying the infrastructure by comparing the state files. So, each of your environment has its own state file remote location. The remote location could be a source code repository or Azure storage account.. Etc.
