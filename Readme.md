@@ -13,6 +13,12 @@
 # Terraform 
 
 ## Introduction
+This document will cover the basic architecture of terraform and it includes the 
+* Comparison between ARM template, Terraform 
+* Benefits of using terraform
+* How to store the state files in remote backend (Azure Blob Storage)  
+* How to pass the AD client secrets in pipeline variables instead of storing those secrets in code repository
+* How to use the same configuration files for multiple environments
 
 ### ARM vs Terraform
 ![](Images/armVSterraform.png)
