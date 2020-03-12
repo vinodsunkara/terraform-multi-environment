@@ -5,9 +5,7 @@
 |File Name | Description |
 |--------- | ------------|
 | main.tf | It contains all the resource configurations |
-| mainvar.tf | It Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables for each environment 
-* subscriptionid
-* tenantid
+| mainvar.tf | It Contains all the sensitive data (sub ID, client ID, Tenant ID, client secret). Replace it with the pipeline variables for each environment * subscriptionid * tenantid
 * clientid
 * clientsecret
 * environment 
