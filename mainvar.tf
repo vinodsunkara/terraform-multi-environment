@@ -14,9 +14,9 @@ variable "location" {
 
 variable "azure_details" {
   default = {
-      subscription_id = "_subscription_id_"
-      client_id = "_client_id_"
-      tenant_id = "_tenant_id_"
-      client_secret = "_client_secret_"
+      subscription_id = "_subscriptionid_"
+      client_id = "_clientid_"
+      tenant_id = "_tenantid_"
+      client_secret = "_clientsecret_"
   }
 }
