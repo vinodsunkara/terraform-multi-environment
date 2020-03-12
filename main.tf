@@ -111,21 +111,29 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location = "${azurerm_resource_group.rg.location}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   vm_size = "${local.vm_size}"
-  
-  os_profile {	
-    computer_name = "${local.resource_name}-${local.region_short_name}-VM"	
-    admin_username = "admin"	
-    admin_password = "Administrator@123"
+    
+    storage_os_disk {
+        name = "myOsDisk"
+        caching = "ReadWrite"
+        create_option = "FromImage"
   }
-  
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
-    version   = "latest"
+
+    storage_image_reference {
+        publisher = "Canonical"
+        offer     = "UbuntuServer"
+        sku       = "16.04.0-LTS"
+        version   = "latest"
+    }
+    os_profile {
+        computer_name = "${local.resource_name}-${local.region_short_name}-VM"
+        admin_username = "admin"
+        admin_password = "Administrator@123"
   }
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching              = "ReadWrite"
-  }
+    boot_diagnostics {
+        enabled = "true"
+        storage_uri = "${azurerm_storage_account.storage.primary_blob_endpoint}"
 }
+
+
+}
+
