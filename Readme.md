@@ -14,8 +14,7 @@
 * location
 * starage account resource group name
 * storage account container name
-* key (statefile name for each environment)
-|
+* key (statefile name for each environment) |
 | variables.tf | variables |
 | provider.tf | Provider is basically to configure or provisioning resources in different cloud environments |
 
